@@ -45,7 +45,7 @@ def setup(gamestate: GameState):
                         selected_piece = None
                     else :
                         print(f"Selected piece: {selected_piece} moved to {row}, {col}")
-                        gamestate.board=gamestate.move_piece(selected_piece, row2, col2)
+                        gamestate.board=gamestate.update_board(selected_piece, row, col)
                         gamestate.switch_turn()
                         click = False
                         selected_piece = None

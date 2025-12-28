@@ -59,22 +59,14 @@ class GameState:
 
         return self.board
     
-    def update_board(self, piece: piece.Piece, row: int, col: int):
-        self.board[piece.row][piece.col] = piece
-        self.board[row][col] = None
+    def update_board(self, piece: piece.Piece, old_row: int, old_col: int):
+        row, col = piece.get_pos()
+        self.board[old_row][old_col] = None
+        self.board[row][col] = piece
         return self.board
     
-    def move_piece(self, piece, to_row, to_col):
-        # 1. On met à jour le plateau interne
-        row, col = piece.get_pos
-        self.board[row][col] = None
-        self.board[to_row][to_col] = piece
-        
-        # 2. Mise à jour des coordonnées de la pièce (important !)
-        piece.row = to_row
-        piece.col = to_col
-        
-        # 3. On renvoie juste True pour dire "Mouvement OK"
+    def feasible_move(self, piece, old_row, old_col):
+        # Pour l'instant, on suppose que toutes les pièces peuvent se déplacer n'importe où
         return True
     def highlight_moves(self, piece):
         """Pour l'UI: cases à surligner."""

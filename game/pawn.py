@@ -13,7 +13,9 @@ class Pawn(Piece):
     
     def move(self, new_row: int, new_col: int):
         if(self.color):
-            if ((new_row == self.row - 1 or (self.row == 6 and new_row == self.row - 2)) and new_row < 8 and new_row >= 0 and new_col == self.col):
+            if ((new_row == self.row - 1 or (self.row == 6 and new_row == self.row - 2)) # standard move
+                 or (new_row == self.row-1 and (new_col == self.col-1 or new_col == self.col+1)) # capture move
+                and new_row < 8 and new_row >= 0 and new_col == self.col): # within bounds
                 self.row = new_row
                 self.col = new_col
         if(not self.color):
