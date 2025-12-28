@@ -5,7 +5,6 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
 from game.pawn import Pawn
-from game.movement import is_valid_move, get_valid_moves
 
 class GameState:
     
@@ -66,14 +65,17 @@ class GameState:
         return self.board
     
     def move_piece(self, piece, to_row, to_col):
-        if not is_valid_move(piece, to_row, to_col, self.board):
-            return False
-        
-        # Applique le mouvement...
-        # (code de mise à jour du board/occ)
-        self.board[piece.row][piece.col] = piece
+        # 1. On met à jour le plateau interne
+        row, col = piece.get_pos
         self.board[row][col] = None
-        return self.board, True
+        self.board[to_row][to_col] = piece
+        
+        # 2. Mise à jour des coordonnées de la pièce (important !)
+        piece.row = to_row
+        piece.col = to_col
+        
+        # 3. On renvoie juste True pour dire "Mouvement OK"
+        return True
     def highlight_moves(self, piece):
         """Pour l'UI: cases à surligner."""
-        return get_valid_moves(piece, self.board)
+        pass

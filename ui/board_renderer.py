@@ -52,10 +52,11 @@ class BoardView:
                 pygame.draw.rect(self.screen, color, rect)
 
     def draw_board(self, gamestate: GameState):
+        board = gamestate.board
         self.draw_grid()
         for row in range(8):
             for col in range(8):
-                piece = gamestate.board[row][col]
+                piece = board[row][col]
                 if piece is None:
                     continue
                 key = piece.get_asset_key()
