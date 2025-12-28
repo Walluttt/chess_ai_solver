@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Chess piece animations */
+.chess-piece {
+  transition: all 0.3s ease;
+  cursor: grab;
+}
+
+.chess-piece:active {
+  cursor: grabbing;
+}
+
+.chess-square {
+  transition: background-color 0.2s ease;
+}
+
+.chess-square.highlight {
+  background-color: rgba(255, 255, 0, 0.4) !important;
+}
+
+.chess-square.selected {
+  background-color: rgba(0, 255, 0, 0.4) !important;
+}
+
+.chess-square.legal-move::after {
+  content: '';
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
