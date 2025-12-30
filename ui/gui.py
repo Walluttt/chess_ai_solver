@@ -36,15 +36,15 @@ def setup(gamestate: GameState):
                     mouse_x, mouse_y = event.pos
                     col2 = (mouse_x - view.offset_x) // view.tile_size
                     row2 = (mouse_y - view.offset_y) // view.tile_size
-                    selected_piece.move(row2, col2)
 
-                    print(f"Clicked on row {row}, col {col}")
-                    if (selected_piece.col==col and selected_piece.row==row):
+                    print(f"Clicked on row {row2}, col {col2}")
+                    if (not gamestate.feasible_move(selected_piece, row2, col2)):
                         print("Invalid move, try again")
                         click = False
                         selected_piece = None
                     else :
-                        print(f"Selected piece: {selected_piece} moved to {row}, {col}")
+                        selected_piece.move(row2, col2)
+                        print(f"Selected piece: {selected_piece} moved from {row}, {col} to {row2}, {col2}")
                         gamestate.board=gamestate.update_board(selected_piece, row, col)
                         gamestate.switch_turn()
                         click = False

@@ -65,9 +65,32 @@ class GameState:
         self.board[row][col] = piece
         return self.board
     
-    def feasible_move(self, piece, old_row, old_col):
+    def feasible_move(self, piece, new_row, new_col):
         # Pour l'instant, on suppose que toutes les pièces peuvent se déplacer n'importe où
+        if(new_row == piece.row and new_col == piece.col): #we must move to a different square
+            print("You must move to a different square")
+            return False
+        if(self.board[new_row][new_col] is not None and self.board[new_row][new_col].color == piece.color): #we can't take our own pieces
+            print("You can't take your own pieces")
+            return False
+        if(isinstance(self.board[new_row][new_col], King)): #we can't move to the king's square
+            print("We can't take the king")
+            return False
+        if(isinstance(piece, Pawn)): #limitation in the movement of the pawn
+            if(piece.col != new_col and self.board[new_row][new_col] is None): #can't move diagonally without taking
+                print("Pawn can't move diagonally without taking")
+                return False
+        
         return True
+    
+    def end_game(self):
+        """Vérifie si la partie est terminée (échec et mat, pat, etc.)."""
+        pass
+    
+    def possible_moves(self, piece):
+        """Retourne une liste des mouvements possibles pour une pièce donnée."""
+        pass
+    
     def highlight_moves(self, piece):
         """Pour l'UI: cases à surligner."""
         pass
