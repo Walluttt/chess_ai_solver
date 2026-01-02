@@ -7,7 +7,8 @@ class Knight(Piece):
 
 
     def move(self, new_row: int, new_col: int):
-        if(abs(new_row - self.row) + abs(new_col - self.col) == 3 and abs(new_row - self.row) <=2 and abs(new_col - self.col) <= 2 and new_row >= 0 and new_row < 8 and new_col >= 0 and new_col < 8):
+        if(abs(new_row - self.row) + abs(new_col - self.col) == 3 and abs(new_row - self.row) <=2 and abs(new_col - self.col) <= 2 
+        and new_row >= 0 and new_row < 8 and new_col >= 0 and new_col < 8):
             self.row = new_row
             self.col = new_col
         return self.row, self.col

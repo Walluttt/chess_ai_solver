@@ -67,8 +67,8 @@ class GameState:
     
     def feasible_move(self, piece, new_row, new_col):
         # Pour l'instant, on suppose que toutes les pièces peuvent se déplacer n'importe où
-        if(new_row == piece.row and new_col == piece.col): #we must move to a different square
-            print("You must move to a different square")
+        (updt_row, updt_col) = piece.move(new_row, new_col)
+        if(updt_row != new_row and updt_col != new_col): #we must move to a different square
             return False
         if(self.board[new_row][new_col] is not None and self.board[new_row][new_col].color == piece.color): #we can't take our own pieces
             print("You can't take your own pieces")
@@ -80,7 +80,8 @@ class GameState:
             if(piece.col != new_col and self.board[new_row][new_col] is None): #can't move diagonally without taking
                 print("Pawn can't move diagonally without taking")
                 return False
-        
+        if(isinstance(piece, King)): #Can't castle if there are pieces in your row
+            pass
         return True
     
     def end_game(self):
