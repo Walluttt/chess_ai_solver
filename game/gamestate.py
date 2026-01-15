@@ -80,8 +80,8 @@ class GameState:
             if(piece.col != new_col and self.board[new_row][new_col] is None): #can't move diagonally without taking
                 print("Pawn can't move diagonally without taking")
                 return False
-        if(isinstance(piece, King)): #Can't castle if there are pieces in your row
-            pass
+        if(isinstance(piece, King) and (((self.board[new_row][new_col] is Rook and not (self.board[new_row][new_col].moved or piece.moved)) or self.board[new_row][new_col] is None))): #Can't castle rook moved
+            return False
         return True
     
     def end_game(self):
